@@ -20,8 +20,10 @@ const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
 });
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://github.com/DanielMinton/calabi-yau-explorer"),
+  metadataBase: new URL(siteUrl),
   icons: { icon: "/favicon.svg" },
   title: "The Calabi-Yau Explorer | Daniel Minton",
   description:
@@ -33,14 +35,21 @@ export const metadata: Metadata = {
       "An interactive WebGPU visualization of Calabi-Yau manifolds and the hidden dimensions of String Theory. Built by Daniel Minton.",
     type: "website",
     siteName: "Calabi-Yau Explorer",
-    images: ["/images/og-preview.png"],
+    images: [
+      {
+        url: `${siteUrl}/images/og-preview.png`,
+        width: 1200,
+        height: 630,
+        type: "image/png",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "The Calabi-Yau Explorer | Daniel Minton",
     description:
       "An interactive WebGPU visualization of Calabi-Yau manifolds and the hidden dimensions of String Theory.",
-    images: ["/images/og-preview.png"],
+    images: [`${siteUrl}/images/og-preview.png`],
   },
 };
 
