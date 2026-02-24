@@ -1,36 +1,103 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# The Calabi-Yau Explorer
+
+[![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
+Interactive WebGPU visualization of Calabi-Yau manifolds — the hidden dimensions of string theory. Explore Fermat surfaces from 3D to 11D with real-time rendering, duality mode toggling, and audio synthesis driven by the manifold's geometry.
+
+![Screenshot](public/images/screenshot.png)
+<!-- TODO: Add screenshot -->
+
+## Tech Stack
+
+- **Next.js** (App Router) + **TypeScript** + **React**
+- **WebGPU** — pure GPU rendering with custom **WGSL** shaders (no Three.js)
+- **Zustand** — lightweight state management
+- **KaTeX** — LaTeX equation rendering
+- **Tailwind CSS v4** — styling
+- **Web Audio API** — oscillator synthesis with real-time oscilloscope
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+pnpm install
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in a WebGPU-capable browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Browser Requirements
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+WebGPU is required:
 
-## Learn More
+- **Chrome 113+** (recommended)
+- **Edge 113+**
+- **Safari 18+** (partial support)
+- **Firefox Nightly** (behind a flag)
 
-To learn more about Next.js, take a look at the following resources:
+Best experience on Chrome with macOS / Apple Silicon.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## The Physics
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Calabi-Yau manifolds are compact complex manifolds central to string theory. In theories requiring extra spatial dimensions beyond the four we observe, the additional dimensions are "compactified" on a Calabi-Yau space. The topology of this compact space determines the particle physics we observe — gauge symmetries, matter content, and coupling constants.
 
-## Deploy on Vercel
+This explorer renders **Fermat surfaces** defined by:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```
+z₁ⁿ + z₂ⁿ = 1,  z₁, z₂ ∈ ℂ
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Parametrized via w = α + iβ:
+
+```
+z₁ = e^(2πik₁/n) · cos(w)^(2/n)
+z₂ = e^(2πik₂/n) · sin(w)^(2/n)
+```
+
+Each dimension **n** (3–11) produces **n²** patches, projected from ℝ⁴ → ℝ³ via stereographic, orthographic, or perspective projection.
+
+**Duality modes** toggle between Type I (SO(32) gauge symmetry, open + closed strings) and Heterotic E₈×E₈ (closed strings only), applying a Z₂ orbifold transformation that visibly alters the manifold's topology.
+
+## Controls
+
+| Key | Action |
+| --- | --- |
+| **Space** | Play / pause rotation |
+| **← →** | Cycle dimensions |
+| **↑ ↓** | Adjust rotation speed |
+| **1–9** | Jump to dimension 3–11 |
+| **D** | Toggle duality mode |
+| **P** | Cycle projection method |
+| **S** | Toggle audio synthesis |
+| **H** | Toggle HUD |
+| **I** | Toggle info panel |
+| **R** | Reset camera |
+
+Mouse drag to orbit. Scroll to zoom. Hover for gravitational vertex pull.
+
+## Architecture
+
+```
+src/
+├── app/              # Next.js routes (landing + explorer)
+├── components/
+│   ├── canvas/       # WebGPU canvas, renderer, fallback
+│   ├── controls/     # Slider, toggles, synth, keyboard handler
+│   └── ui/           # HUD, info panel, loading overlay, footer
+├── gpu/
+│   ├── pipelines/    # Render + starfield pipeline setup
+│   ├── shaders/      # WGSL vertex, fragment, starfield shaders
+│   ├── buffers.ts    # Vertex/index/uniform buffer management
+│   ├── init.ts       # WebGPU device initialization
+│   └── types.ts      # GPU resource interfaces
+├── lib/              # Constants, utilities
+├── math/             # Matrix ops, Calabi-Yau mesh generation, projections
+└── stores/           # Zustand explorer store
+```
+
+## License
+
+MIT
+
+---
+
+Created by [Daniel Minton](https://github.com/DanielMinton)

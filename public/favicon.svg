@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <defs>
+    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4e8fd4"/>
+      <stop offset="100%" stop-color="#a855f7"/>
+    </linearGradient>
+  </defs>
+  <!-- Vibrating closed string loop (Calabi-Yau cross-section) -->
+  <path d="M16 3 C24 6, 29 12, 27 16 C29 20, 24 26, 16 29 C8 26, 3 20, 5 16 C3 12, 8 6, 16 3Z" fill="none" stroke="url(#g)" stroke-width="1.8" opacity="0.3"/>
+  <path d="M16 5 C22 3, 29 10, 26 16 C29 22, 22 29, 16 27 C10 29, 3 22, 6 16 C3 10, 10 3, 16 5Z" fill="none" stroke="url(#g)" stroke-width="2" opacity="0.6"/>
+  <path d="M16 7 C21 9, 25 13, 24 16 C25 19, 21 23, 16 25 C11 23, 7 19, 8 16 C7 13, 11 9, 16 7Z" fill="none" stroke="url(#g)" stroke-width="2.2" opacity="1"/>
+</svg>
