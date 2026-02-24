@@ -33,14 +33,14 @@ export const metadata: Metadata = {
       "An interactive WebGPU visualization of Calabi-Yau manifolds and the hidden dimensions of String Theory. Built by Daniel Minton.",
     type: "website",
     siteName: "Calabi-Yau Explorer",
-    images: ["/images/OpossumLogo.png"],
+    images: ["/images/og-preview.png"],
   },
   twitter: {
     card: "summary_large_image",
     title: "The Calabi-Yau Explorer | Daniel Minton",
     description:
       "An interactive WebGPU visualization of Calabi-Yau manifolds and the hidden dimensions of String Theory.",
-    images: ["/images/OpossumLogo.png"],
+    images: ["/images/og-preview.png"],
   },
 };
 
