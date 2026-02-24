@@ -4,6 +4,7 @@
  */
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 
 import "katex/dist/katex.min.css";
 import "./globals.css";
@@ -57,6 +58,7 @@ export default function RootLayout({
       >
         {children}
         <Footer />
+        <Analytics />
       </body>
     </html>
   );
